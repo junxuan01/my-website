@@ -1,6 +1,6 @@
 ---
 title: "React Markdown + Shiki 集成测试"
-date: "2025-01-10"
+date: 2025-01-10
 description: "测试 react-markdown 和 Shiki 的语法高亮效果，展示各种 Markdown 特性"
 tags: ["React", "Markdown", "Shiki", "测试"]
 ---

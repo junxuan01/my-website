@@ -7,12 +7,28 @@
  * 格式化日期为中文格式（客户端版本）
  */
 export function formatDate(dateString: string): string {
-  const date = new Date(dateString)
-  return new Intl.DateTimeFormat('zh-CN', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }).format(date)
+  if (!dateString) {
+    return '日期未知'
+  }
+
+  try {
+    const date = new Date(dateString)
+
+    // 检查日期是否有效
+    if (Number.isNaN(date.getTime())) {
+      console.error(`Invalid date string: ${dateString}`)
+      return dateString // 返回原始字符串
+    }
+
+    return new Intl.DateTimeFormat('zh-CN', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }).format(date)
+  } catch (error) {
+    console.error(`Error formatting date: ${dateString}`, error)
+    return dateString
+  }
 }
 
 /**

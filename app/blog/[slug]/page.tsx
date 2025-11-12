@@ -94,7 +94,7 @@ export default async function PostPage({ params }: PostPageProps) {
         </header>
 
         {/* 文章内容 */}
-        <MarkdownContent content={post.content} codeTheme="materialDark" />
+        <MarkdownContent content={post.content} />
       </article>
     </div>
   )
