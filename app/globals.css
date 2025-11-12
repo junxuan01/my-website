@@ -24,3 +24,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-color-scheme: dark) {
+  .prose :not(pre) > code {
+    background: rgba(110, 118, 129, 0.4) !important;
+    color: #e6edf3;
+  }
+}
