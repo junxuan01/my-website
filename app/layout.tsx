@@ -1,18 +1,21 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Roboto, Roboto_Mono } from 'next/font/google'
 import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
-import ScrollWatcher from '@/app/components/ScrollWatcher'
 import './globals.css'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const roboto = Roboto({
+  weight: ['300', '400', '500', '700'],
   subsets: ['latin'],
+  variable: '--font-roboto',
+  display: 'swap',
 })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const robotoMono = Roboto_Mono({
+  weight: ['400', '500', '700'],
   subsets: ['latin'],
+  variable: '--font-roboto-mono',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -28,9 +31,8 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-black at-top`}
+        className={`${roboto.variable} ${robotoMono.variable} font-sans antialiased bg-white dark:bg-black`}
       >
-        <ScrollWatcher />
         <Header />
         <main className="min-h-screen pt-16">{children}</main>
         <Footer />

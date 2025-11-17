@@ -11,8 +11,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-roboto);
+  --font-mono: var(--font-roboto-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,11 +24,18 @@
 
 body {
   background: var(--background);
+  font-family: var(--font-roboto), ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
 /* 平滑滚动 */
 html {
   scroll-behavior: smooth;
+}
+
+/* 覆盖掘金主题的代码字体，使用 Roboto Mono */
+.markdown-body code,
+.markdown-body pre {
+  font-family: var(--font-roboto-mono), ui-monospace, monospace !important;
 }
 
 
