@@ -67,105 +67,129 @@ export default async function SeriesPostPage({ params }: SeriesPostPageProps) {
   const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null
 
   return (
-    <div className="min-h-screen py-24 px-6">
-      <article className="max-w-4xl mx-auto">
-        {/* 顶部导航 */}
-        <div className="flex items-center justify-between text-sm text-zinc-500 mb-8 border-b border-zinc-200 dark:border-zinc-800 pb-4">
-          <div className="flex items-center gap-2">
-            <Link
-              href="/series"
-              className="hover:text-zinc-900 dark:hover:text-zinc-300 transition-colors"
-            >
-              系列
-            </Link>
-            <span>/</span>
-            <Link
-              href={`/series/${slug}`}
-              className="hover:text-zinc-900 dark:hover:text-zinc-300 transition-colors"
-            >
-              {series.title}
-            </Link>
-          </div>
-          <div className="hidden sm:block">
-            第 {currentIndex + 1} / {allPosts.length} 篇
-          </div>
+    <div className="min-h-screen py-24 px-6 lg:px-8">
+      <div className="max-w-[1600px] mx-auto">
+        <div className="flex flex-col lg:flex-row gap-12">
+          {/* 左侧目录 - 桌面端固定 */}
+          <aside className="lg:w-72 lg:shrink-0">
+            <div className="lg:sticky lg:top-24">
+              {/* 面包屑导航 */}
+              <div className="flex items-center gap-2 text-sm text-zinc-500 mb-6">
+                <Link
+                  href="/series"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-300 transition-colors"
+                >
+                  系列
+                </Link>
+                <span>/</span>
+                <span className="text-zinc-900 dark:text-zinc-300">{series.title}</span>
+              </div>
+
+              {/* 系列标题 */}
+              <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50 mb-4">
+                {series.title}
+              </h2>
+
+              {/* 系列描述 */}
+              {series.description && (
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6">
+                  {series.description}
+                </p>
+              )}
+
+              {/* 文章列表 */}
+              <nav className="space-y-1">
+                {allPosts.map((p, index) => {
+                  const isActive = p.slug === decodedPostSlug
+                  return (
+                    <Link
+                      key={p.slug}
+                      href={`/series/${slug}/${encodeURIComponent(p.slug)}`}
+                      className={`
+                        block px-3 py-2 rounded-lg text-sm transition-colors
+                        ${
+                          isActive
+                            ? 'bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-400 font-medium'
+                            : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-300'
+                        }
+                      `}
+                    >
+                      <div className="flex items-start gap-2">
+                        <span className="shrink-0 text-zinc-400 dark:text-zinc-600">
+                          {index + 1}.
+                        </span>
+                        <span className="line-clamp-2">{p.title}</span>
+                      </div>
+                    </Link>
+                  )
+                })}
+              </nav>
+            </div>
+          </aside>
+
+          {/* 右侧内容区 */}
+          <article className="flex-1 min-w-0">
+            {/* 文章头部 */}
+            <header className="mb-12">
+              <div className="flex items-center gap-3 text-sm text-zinc-500 mb-4">
+                <time>{post.date}</time>
+                <span>•</span>
+                <span>
+                  第 {currentIndex + 1} / {allPosts.length} 篇
+                </span>
+              </div>
+              <h1 className="text-4xl sm:text-5xl font-semibold text-zinc-900 dark:text-zinc-50 mb-6">
+                {post.title}
+              </h1>
+              {post.description && (
+                <p className="text-lg text-zinc-600 dark:text-zinc-400">{post.description}</p>
+              )}
+            </header>
+
+            {/* 文章内容 */}
+            <MarkdownContent content={post.content} />
+
+            {/* 底部导航 */}
+            <div className="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* 上一篇 */}
+                {prevPost ? (
+                  <Link
+                    href={`/series/${slug}/${encodeURIComponent(prevPost.slug)}`}
+                    className="group flex flex-col p-4 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
+                  >
+                    <span className="text-sm text-zinc-500 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                      ← 上一篇
+                    </span>
+                    <span className="font-medium text-zinc-900 dark:text-zinc-50 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                      {prevPost.title}
+                    </span>
+                  </Link>
+                ) : (
+                  <div /> // 占位
+                )}
+
+                {/* 下一篇 */}
+                {nextPost ? (
+                  <Link
+                    href={`/series/${slug}/${encodeURIComponent(nextPost.slug)}`}
+                    className="group flex flex-col items-end p-4 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:border-blue-500 dark:hover:border-blue-500 transition-colors text-right"
+                  >
+                    <span className="text-sm text-zinc-500 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                      下一篇 →
+                    </span>
+                    <span className="font-medium text-zinc-900 dark:text-zinc-50 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                      {nextPost.title}
+                    </span>
+                  </Link>
+                ) : (
+                  <div />
+                )}
+              </div>
+            </div>
+          </article>
         </div>
-
-        {/* 文章头部 */}
-        <header className="mb-12">
-          <h1 className="text-4xl sm:text-5xl font-semibold text-zinc-900 dark:text-zinc-50 mb-6">
-            {post.title}
-          </h1>
-          <div className="flex items-center gap-4 text-zinc-600 dark:text-zinc-400">
-            <time>{post.date}</time>
-          </div>
-        </header>
-
-        {/* 文章内容 */}
-        <MarkdownContent content={post.content} />
-
-        {/* 底部导航 */}
-        <div className="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* 上一篇 */}
-            {prevPost ? (
-              <Link
-                href={`/series/${slug}/${encodeURIComponent(prevPost.slug)}`}
-                className="group flex flex-col p-4 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
-              >
-                <span className="text-sm text-zinc-500 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400">
-                  ← 上一篇
-                </span>
-                <span className="font-medium text-zinc-900 dark:text-zinc-50 group-hover:text-blue-600 dark:group-hover:text-blue-400">
-                  {prevPost.title}
-                </span>
-              </Link>
-            ) : (
-              <div /> // 占位
-            )}
-
-            {/* 下一篇 */}
-            {nextPost ? (
-              <Link
-                href={`/series/${slug}/${encodeURIComponent(nextPost.slug)}`}
-                className="group flex flex-col items-end p-4 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:border-blue-500 dark:hover:border-blue-500 transition-colors text-right"
-              >
-                <span className="text-sm text-zinc-500 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400">
-                  下一篇 →
-                </span>
-                <span className="font-medium text-zinc-900 dark:text-zinc-50 group-hover:text-blue-600 dark:group-hover:text-blue-400">
-                  {nextPost.title}
-                </span>
-              </Link>
-            ) : (
-              <div />
-            )}
-          </div>
-
-          <div className="mt-8 text-center">
-            <Link
-              href={`/series/${slug}`}
-              className="inline-flex items-center gap-2 px-6 py-2 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 rounded-full hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium"
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h7"
-                />
-              </svg>
-              返回目录
-            </Link>
-          </div>
-        </div>
-      </article>
+      </div>
     </div>
   )
 }

@@ -43,8 +43,8 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   return (
-    <div className="min-h-screen py-24 px-6">
-      <article className="max-w-4xl mx-auto">
+    <div className="min-h-screen py-24 px-6 lg:px-8">
+      <article className="max-w-5xl mx-auto">
         {/* 返回链接 */}
         <Link
           href="/blog"

@@ -3,15 +3,36 @@ import { FadeIn, ScaleOnHover } from '@/app/components/MotionComponents'
 import PostCard from '@/app/components/PostCard'
 import { getAllPosts } from '@/app/lib/blog'
 
+const features = [
+  {
+    icon: '✨',
+    title: '设计驱动',
+    description: '以用户体验为核心，打造优雅的视觉呈现',
+  },
+  {
+    icon: '⚡',
+    title: '性能优先',
+    description: '极致优化，追求毫秒级的响应速度',
+  },
+  {
+    icon: '🎯',
+    title: '持续进化',
+    description: '不断学习，探索技术与设计的前沿',
+  },
+]
+
 export default function Home() {
   // 使用 Server Component 直接获取数据 - React 19 最佳实践
   const latestPosts = getAllPosts().slice(0, 3)
 
   return (
-    <>
-      {/* Hero Section - Apple 风格 */}
-      <section className="relative min-h-screen flex items-center justify-center px-6">
-        <div className="max-w-4xl mx-auto text-center">
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section
+        className="flex items-center justify-center px-6 lg:px-8"
+        style={{ height: 'calc(100vh - 4rem)' }}
+      >
+        <div className="max-w-5xl mx-auto text-center">
           <FadeIn>
             <h1 className="text-6xl sm:text-7xl md:text-8xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50 mb-6">
               设计与代码
@@ -68,8 +89,8 @@ export default function Home() {
 
       {/* 最新文章 */}
       {latestPosts.length > 0 && (
-        <section className="py-24 px-6 bg-zinc-50 dark:bg-zinc-950">
-          <div className="max-w-7xl mx-auto">
+        <section className="py-24 px-6 lg:px-8 bg-zinc-50 dark:bg-zinc-950">
+          <div className="max-w-[1400px] mx-auto">
             <FadeIn>
               <div className="flex items-end justify-between mb-12">
                 <div>
@@ -111,8 +132,8 @@ export default function Home() {
       )}
 
       {/* 特色区块 */}
-      <section className="py-32 px-6">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-32 px-6 lg:px-8">
+        <div className="max-w-[1400px] mx-auto">
           <FadeIn>
             <h2 className="text-4xl sm:text-5xl font-semibold text-center text-zinc-900 dark:text-zinc-50 mb-20">
               专注于细节
@@ -133,24 +154,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }
-
-const features = [
-  {
-    icon: '✨',
-    title: '设计驱动',
-    description: '以用户体验为核心，打造优雅的视觉呈现',
-  },
-  {
-    icon: '⚡',
-    title: '性能优先',
-    description: '极致优化，追求毫秒级的响应速度',
-  },
-  {
-    icon: '🎯',
-    title: '持续进化',
-    description: '不断学习，探索技术与设计的前沿',
-  },
-]

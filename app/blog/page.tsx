@@ -12,8 +12,8 @@ export default function BlogPage() {
   const posts = getAllPosts()
 
   return (
-    <div className="min-h-screen py-24 px-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen py-24 px-6 lg:px-8">
+      <div className="max-w-[1600px] mx-auto">
         {/* 页面标题 */}
         <FadeIn>
           <div className="mb-16 text-center">
