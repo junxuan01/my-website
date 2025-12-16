@@ -68,7 +68,7 @@ export default async function SeriesPostPage({ params }: SeriesPostPageProps) {
 
   return (
     <div className="min-h-screen py-24 px-6 lg:px-8">
-      <div className="max-w-[1600px] mx-auto">
+      <div className="max-w-400 mx-auto">
         <div className="flex flex-col lg:flex-row gap-12">
           {/* 左侧目录 - 桌面端固定 */}
           <aside className="lg:w-72 lg:shrink-0">

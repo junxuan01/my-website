@@ -13,7 +13,7 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen py-24 px-6 lg:px-8">
-      <div className="max-w-[1600px] mx-auto">
+      <div className="max-w-400 mx-auto">
         {/* 页面标题 */}
         <FadeIn>
           <div className="mb-16 text-center">

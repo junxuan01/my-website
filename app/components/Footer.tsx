@@ -16,7 +16,7 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-zinc-200/50 dark:border-zinc-800/50 bg-white dark:bg-black">
-      <div className="mx-auto max-w-[1600px] px-6 py-12 lg:px-8">
+      <div className="mx-auto max-w-400 px-6 py-12 lg:px-8">
         {/* 链接区域 */}
         <div className="grid grid-cols-2 gap-8 mb-8 sm:grid-cols-4">
           {Object.entries(footerLinks).map(([category, links]) => (

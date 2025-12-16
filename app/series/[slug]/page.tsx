@@ -41,7 +41,7 @@ export default async function SeriesDetailPage({ params }: SeriesPageProps) {
 
   return (
     <div className="min-h-screen py-24 px-6 lg:px-8">
-      <div className="max-w-[1600px] mx-auto">
+      <div className="max-w-400 mx-auto">
         {/* 面包屑导航 */}
         <div className="flex items-center gap-2 text-sm text-zinc-500 mb-8">
           <Link

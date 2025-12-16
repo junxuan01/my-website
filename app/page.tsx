@@ -90,7 +90,7 @@ export default function Home() {
       {/* 最新文章 */}
       {latestPosts.length > 0 && (
         <section className="py-24 px-6 lg:px-8 bg-zinc-50 dark:bg-zinc-950">
-          <div className="max-w-[1400px] mx-auto">
+          <div className="max-w-350 mx-auto">
             <FadeIn>
               <div className="flex items-end justify-between mb-12">
                 <div>
@@ -133,7 +133,7 @@ export default function Home() {
 
       {/* 特色区块 */}
       <section className="py-32 px-6 lg:px-8">
-        <div className="max-w-[1400px] mx-auto">
+        <div className="max-w-350 mx-auto">
           <FadeIn>
             <h2 className="text-4xl sm:text-5xl font-semibold text-center text-zinc-900 dark:text-zinc-50 mb-20">
               专注于细节
